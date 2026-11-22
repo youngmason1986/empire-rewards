@@ -1,0 +1,24 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+        // Local offline repo (Brain's Linux only): used when present so local
+        // builds keep working without internet; skipped on CI runners.
+        if (file("/home/hatch/workspace/local-maven-repo").exists()) {
+            maven { url = uri("file:///home/hatch/workspace/local-maven-repo") }
+        }
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        if (file("/home/hatch/workspace/local-maven-repo").exists()) {
+            maven { url = uri("file:///home/hatch/workspace/local-maven-repo") }
+        }
+    }
+}
+rootProject.name = "empire-rewards"
+include(":app")
